@@ -15,7 +15,7 @@ const AddUser =()=>{
 
         e.preventDefault()
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
-        const response = await axios.post(`${APIURL}/edit_user/`,adduser).then((r)=>{
+        await axios.post(`${APIURL}/edit_user/`,adduser).then((r)=>{
             if(r.status === 201){
                 alert("user created successfully")
                 navigate('/admin_pannel')

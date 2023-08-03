@@ -1,11 +1,11 @@
-import UserLogin from "./Components/User/userLogin";
-import UserSignup from "./Components/User/userSignup";
-import AdminLogin from "./Components/Admin/adminLogin";
-import AdminPannel from "./Components/Admin/adminPannel";
-import Profile from "./Components/User/Profile";
+import UserLogin from "./Components/USER/userLogin";
+import UserSignup from "./Components/USER/userSignup";
+import AdminLogin from "./Components/ADMIN/adminLogin";
+import AdminPannel from "./Components/ADMIN/adminPannel";
+import Profile from "./Components/USER/Profile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import UserUpdate from "./Components/Admin/UserUpdate";
-import AddUser from "./Components/Admin/AddUser";
+import UserUpdate from "./Components/ADMIN/UserUpdate";
+import AddUser from "./Components/ADMIN/AddUser";
 import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
@@ -42,14 +42,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <AddUser />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
               </ProtectedRoute>
             }
           />

@@ -16,8 +16,6 @@ const Profile = ()=>{
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id');
     const token = localStorage.getItem('token')
-    
-
 
     const handleUpdate=(e)=>{
         e.preventDefault()
@@ -30,27 +28,25 @@ const Profile = ()=>{
         async function UpdateData(){
             const formData = new FormData();
            formData.append('profile',e.target.files[0]);
-            const response = await axios.put(`${APIURL}/user_profile/${id}`,formData,{
+            await axios.put(`${APIURL}/user_profile/${id}`,formData,{
                 headers: {
                   "Content-Type": "multipart/form-data",
                   "Authorization":`Bearer ${token}`
                 },
               })
-
         }
     }
 
     useEffect(()=>{
         async function FetchData(){
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            const response = await axios.get(`http://127.0.0.1:8000/api/user/user_profile/${id}`).then(r=>{
+            await axios.get(`http://127.0.0.1:8000/api/user/user_profile/${id}`).then(r=>{
                 dispatch(ProfileAction(r.data))
                 console.log(r.data)
             })
-
         }
         FetchData()
-    },[id])
+    },[id, dispatch, token])
     return(
         <>
         <div className="profile-container">
@@ -60,10 +56,9 @@ const Profile = ()=>{
    <div className="profile-info">
      <div className="profile-picture">
      {
-          uploadimg?<img src={uploadimg?URL.createObjectURL(uploadimg):""} alt="Profile Picture" />:
+          uploadimg?<img src={uploadimg?URL.createObjectURL(uploadimg):""} alt="" />:
          profile.profile? <img src={`http://localhost:8000${profile.profile}`} alt="Profile" />:<img alt='profile'/>
             }
-
 
        <input type='file' onChange={handleUpdate} accept='image/*' className='img-upload'></input>
      </div>
@@ -86,7 +81,5 @@ const Profile = ()=>{
      </>
     )
 }
-
-
 
 export default Profile

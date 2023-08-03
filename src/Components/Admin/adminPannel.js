@@ -1,38 +1,36 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './adminPannel.css'
 import AdminUserlist from './adminUserlist'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserListAction } from '../../Redux/Action/UserListAction'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { SearchAction } from '../../Redux/Action/SearchAction'
 
 const AdminPannel = ()=> {
   const dispatch=useDispatch()
   const APIURL = useSelector(state=>state.APIURL.url)
-  const userlist = useSelector(state=>state.userlist)
   const searchkey = useSelector(state=>state.search.key)
-  const navigate = useNavigate()
   useEffect(()=>{
 
     async function Fetchdata(){
     const token = localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    const response = await axios.get(`http://127.0.0.1:8000/api/user/userlist/`).then(response=> {
+    await axios.get(`http://127.0.0.1:8000/api/user/userlist/`).then(response=> {
       dispatch(UserListAction(response.data))
     })
     }
 
     Fetchdata()
 
-  },[])
+  },[dispatch])
 
   const searchHandler = async(e)=>{
     console.log(e.target.value)
     e.preventDefault()
     dispatch(SearchAction(e.target.value))
 
-    const response = await axios.get(`${APIURL}/search_user`,{ params: { username: e.target.value } }).then(response => {
+    await axios.get(`${APIURL}/search_user`,{ params: { username: e.target.value } }).then(response => {
       dispatch(UserListAction(response.data))
     })
     .catch(error => {
@@ -43,7 +41,7 @@ const AdminPannel = ()=> {
 
   const logoutHandler = async()=>{
 
-   const response =  await axios.post(`${APIURL}/logout/`)
+   await axios.post(`${APIURL}/logout/`)
     localStorage.removeItem('token');
     window.location.reload()
 

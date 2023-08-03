@@ -19,7 +19,7 @@ const AdminUserlist = ()=>{
 
   const deleteHandler =async(id)=>{
     try{
-      const response = await axios.delete(`${APIURL}/edit_user/${id}`);
+      await axios.delete(`${APIURL}/edit_user/${id}`);
         alert('User deleted successfully')
         window.location.reload();
 
