@@ -1,0 +1,15 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+}
+  
+  .loader {
+    height: 180px;
+    width: 180px;
+    border-radius: 9px;
+    background-color: white;
+  }
+  
