@@ -8,7 +8,7 @@ const AdminLogin = ()=> {
   const AdminLogin = useSelector(state=>state.AdminLogin)
   const APIURL = useSelector(state=>state.APIURL.url)
   const dispatch = useDispatch()
-  const navigete = useNavigate()
+  const navigate = useNavigate()
 
   const handleSubmit=async(e)=>{
     e.preventDefault()
@@ -18,7 +18,7 @@ const AdminLogin = ()=> {
       console.log(response)
       if (response.data.token){
         localStorage.setItem('token', response.data.token);
-        navigete('/admin_pannel')
+        navigate('/admin_pannel')
 
       }else{
         alert('login Failed')

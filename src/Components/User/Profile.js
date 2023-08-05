@@ -7,7 +7,6 @@ import { ProfileAction } from '../../Redux/Action/ProfileAction'
 
 
 const Profile = ()=>{
-
     const profile = useSelector(state=>state.profile.user)
     const APIURL = useSelector(state=>state.APIURL.url)
     const[uploadimg,setUploadimg] = useState()
@@ -27,7 +26,7 @@ const Profile = ()=>{
 
         async function UpdateData(){
             const formData = new FormData();
-           formData.append('profile',e.target.files[0]);
+            formData.append('profile',e.target.files[0]);
             await axios.put(`${APIURL}/user_profile/${id}`,formData,{
                 headers: {
                   "Content-Type": "multipart/form-data",
